@@ -85,10 +85,14 @@ export function NexusProvider({ children }) {
     setBoot('ready');
   }, [showDemoScenario]);
 
-  // A static deploy has no engine behind /api; VITE_DEMO_ONLY=1 skips the offline screen and opens the snapshot.
+  // VITE_DEMO_ONLY=1 builds a static demo with no engine. Otherwise connect to the engine, and in production
+  // fall back to the baked snapshot if it is unreachable (a sleeping free-tier host, for instance).
   useEffect(() => {
     if (import.meta.env.VITE_DEMO_ONLY === '1') enterDemo(); else bootstrap();
   }, [bootstrap, enterDemo]);
+  useEffect(() => {
+    if (boot === 'offline' && import.meta.env.PROD) enterDemo();
+  }, [boot, enterDemo]);
 
   const loadScenario = useCallback(
     (id) =>
