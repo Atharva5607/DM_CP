@@ -1,0 +1,91 @@
+/* ---------- graph view ---------- */
+.nx-view { position: absolute; inset: 0; overflow: hidden; touch-action: none; }
+.nx-view.is-interactive .nx-svg { cursor: grab; }
+.nx-view.is-interactive .nx-svg:active { cursor: grabbing; }
+.nx-svg { display: block; user-select: none; }
+.nx-world { will-change: transform; }
+
+.nx-decor { transition: opacity 0.3s; }
+.nx-decor.is-off { opacity: 0.12; }
+.nx-decor-title { font: 600 14px var(--font-display); }
+.nx-decor-sub { font: 400 11.5px var(--font-body); fill: var(--muted); }
+
+.nx-edge line { stroke-linecap: round; transition: stroke 0.4s, opacity 0.3s; }
+.nx-edge.is-ok line { opacity: 0.5; }
+.nx-edge.is-stressed line { stroke: var(--warn); }
+.nx-edge.is-degraded line { stroke: #9aa4c7; stroke-dasharray: 5 5; }
+.nx-edge.is-down line { stroke: #ff5d73; stroke-dasharray: 2 5; }
+.nx-edge.is-blocked line { stroke: var(--fail); stroke-width: 3.2px !important; stroke-dasharray: 7 5; }
+.nx-edge.is-dim { opacity: 0.1; }
+.nx-tag { fill: #2a0b1a; stroke: var(--fail); stroke-width: 1; }
+.nx-tag-text { font: 500 10.5px var(--font-body); fill: #ff8aa6; text-anchor: middle; }
+
+.nx-dep { transition: opacity 0.3s; }
+.nx-dep.is-dim { opacity: 0.08; }
+.nx-dep-line { fill: none; stroke: rgba(139, 123, 255, 0.26); stroke-dasharray: 3 6; stroke-linecap: round; transition: stroke 0.4s; }
+.nx-dep.is-hot .nx-dep-line { stroke: rgba(179, 168, 255, 0.95); stroke-dasharray: 5 4; }
+.nx-dep.is-active .nx-dep-line { stroke: #ff5d73; stroke-dasharray: none; }
+.nx-dep.is-new .nx-dep-line { animation: nxFlash 1.2s ease-out; }
+@keyframes nxFlash { 0% { stroke-width: 6px; opacity: 0.4; } 100% { opacity: 1; } }
+.nx-particle { fill: #ffe3e8; filter: drop-shadow(0 0 3px #ff5d73); }
+
+.nx-node { cursor: pointer; transition: opacity 0.3s; }
+.nx-node.is-dim { opacity: 0.2; }
+.nx-node-inner { transition: transform 0.18s ease; }
+.nx-node.is-hovered .nx-node-inner { transform: scale(1.14); }
+.nx-body { fill: #0c1128; stroke-width: 1.7; transition: fill 0.4s; }
+.nx-node[data-status='failed'] .nx-body { fill: #2b0b1b; }
+.nx-node[data-status='critical'] .nx-body { fill: #231016; }
+.nx-halo { opacity: 0.16; transition: fill 0.4s; }
+.nx-ring-bg { fill: none; stroke: rgba(255, 255, 255, 0.09); stroke-width: 3; }
+.nx-ring { fill: none; stroke-width: 3; stroke-linecap: round; transition: stroke-dasharray 0.6s ease, stroke 0.4s; }
+.nx-node[data-status='isolated'] .nx-ring { stroke-dasharray: 4 5 !important; }
+.nx-pulse { fill: none; stroke: var(--fail); stroke-width: 2; transform-box: fill-box; transform-origin: center; animation: nxPulse 1.8s ease-out infinite; }
+@keyframes nxPulse { 0% { transform: scale(1); opacity: 0.9; } 100% { transform: scale(2.1); opacity: 0; } }
+.nx-ripple { fill: none; stroke: #ff9db4; stroke-width: 2.5; transform-box: fill-box; transform-origin: center; animation: nxRipple 1.3s ease-out 1 forwards; }
+@keyframes nxRipple { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(3); opacity: 0; } }
+.nx-select-ring { fill: none; stroke: #fff; stroke-width: 1.4; stroke-dasharray: 3 5; transform-box: fill-box; transform-origin: center; animation: nxSpin 8s linear infinite; }
+.nx-nlabel { font: 500 12px var(--font-body); fill: #d3d7ef; text-anchor: middle; paint-order: stroke; stroke: #070914; stroke-width: 4px; stroke-linejoin: round; pointer-events: none; }
+.nx-hp { font: 500 10px var(--font-mono); text-anchor: middle; paint-order: stroke; stroke: #070914; stroke-width: 3.5px; pointer-events: none; }
+
+.nx-tip { position: absolute; z-index: 5; width: 250px; transform: translate(-50%, -100%); padding: 12px 14px; border-radius: 14px; border: 1px solid var(--line-strong); background: rgba(12, 17, 40, 0.95); backdrop-filter: blur(14px); box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.8); pointer-events: none; display: flex; flex-direction: column; gap: 7px; }
+.nx-tip.is-below { transform: translate(-50%, 0); }
+.nx-tip-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.nx-tip-head strong { font: 600 14px var(--font-display); }
+.nx-tip-meta { font-size: 12px; color: var(--muted); }
+
+.nx-zoom { position: absolute; right: 14px; top: 64px; display: flex; flex-direction: column; border-radius: 12px; border: 1px solid var(--line); background: rgba(12, 17, 38, 0.8); backdrop-filter: blur(10px); overflow: hidden; }
+.nx-zoom button { display: flex; width: 34px; height: 34px; align-items: center; justify-content: center; border: 0; background: transparent; color: var(--text-2); }
+.nx-zoom button + button { border-top: 1px solid var(--line); }
+.nx-zoom button:hover { background: rgba(255, 255, 255, 0.1); color: var(--text); }
+
+/* ---------- charts ---------- */
+.nx-chart { display: block; width: 100%; height: auto; overflow: visible; }
+.nx-grid { stroke: rgba(255, 255, 255, 0.08); fill: none; stroke-width: 1; }
+.nx-axis-label { font: 500 11.5px var(--font-body); fill: var(--text-2); }
+.nx-axis-value { font: 400 10.5px var(--font-mono); fill: var(--muted); }
+.nx-bar-value { font: 500 11px var(--font-mono); fill: var(--text-2); }
+.nx-dot { stroke: #070914; stroke-width: 2; }
+.nx-dot-mint { fill: var(--mint); stroke: #070914; stroke-width: 2; }
+.nx-curve { fill: none; stroke: var(--mint); stroke-width: 2.4; stroke-linejoin: round; }
+.nx-radar { display: block; margin: 0 auto; width: 100%; max-width: 400px; height: auto; overflow: visible; }
+.nx-radar-before { fill: none; stroke: rgba(255, 255, 255, 0.28); stroke-dasharray: 4 4; }
+.nx-radar-after { fill: rgba(139, 123, 255, 0.26); stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+.nx-flow { fill-opacity: 0.5; transition: fill-opacity 0.2s; }
+.nx-flow:hover { fill-opacity: 0.85; }
+.nx-cell-num { font: 600 15px var(--font-display); fill: #fff; }
+.nx-cell-sub { font: 500 11px var(--font-mono); fill: #ffd1da; }
+.nx-trow { cursor: pointer; }
+.nx-trow-label { font: 400 12px var(--font-body); fill: var(--text-2); }
+.nx-trow:hover .nx-trow-label, .nx-trow.is-selected .nx-trow-label { fill: #fff; }
+.nx-gauge { display: block; max-width: 100%; height: auto; }
+.nx-tick { stroke: rgba(255, 255, 255, 0.14); stroke-width: 1; }
+.nx-tick.major { stroke: rgba(255, 255, 255, 0.3); stroke-width: 1.6; }
+.nx-gauge-track { fill: none; stroke: rgba(255, 255, 255, 0.08); stroke-width: 13; stroke-linecap: round; }
+.nx-gauge-fill { fill: none; stroke-width: 13; stroke-linecap: round; }
+.nx-gauge-knob { fill: #0c1128; stroke-width: 3; }
+.nx-gauge-num { font: 600 52px var(--font-display); fill: var(--text); }
+.nx-gauge-level { font: 500 13px var(--font-body); }
+
+/* Edges are decoration only; keep them from stealing hover and clicks from nodes. */
+.nx-edges, .nx-deps, .nx-decor { pointer-events: none; }
