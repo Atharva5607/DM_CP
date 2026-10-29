@@ -1,6 +1,6 @@
-export function Segmented({ value, onChange, options, label, size = 'md' }) {
+export function Segmented({ value, onChange, options, label, size = 'md', variant }) {
   return (
-    <div className={`nx-seg is-${size}`} role="tablist" aria-label={label}>
+    <div className={`nx-seg is-${size}${variant ? ` is-${variant}` : ''}`} role="tablist" aria-label={label}>
       {options.map((o) => (
         <button key={o.id} role="tab" aria-selected={value === o.id} className={value === o.id ? 'is-on' : ''} onClick={() => onChange(o.id)} title={o.title}>
           {o.icon}{o.label && <span>{o.label}</span>}

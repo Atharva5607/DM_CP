@@ -4,7 +4,7 @@ import { arcPath, niceTicks, polar } from '../utils/geometry';
 import { STATUS, STATUS_ORDER, layerColor, minutes, sortLayers } from '../utils/graph';
 import { dependencyMatrix, layerFlows } from '../utils/insights';
 
-const LEVEL_COLORS = { low: '#3ddc97', moderate: '#ffb020', high: '#ff7a59', critical: '#ff2e63' };
+const LEVEL_COLORS = { low: '#8fd9b0', moderate: '#efc274', high: '#ff7a59', critical: '#ec6f85' };
 const SHORT = { emergency: 'Emergency', hospital: 'Healthcare', traffic: 'Traffic', comm: 'Comms', power: 'Power' };
 export const shortLayer = (layers, id) => SHORT[id] || (layers.find((l) => l.id === id)?.name || id).slice(0, 10);
 const uid = (raw) => raw.replace(/:/g, '');
@@ -26,7 +26,7 @@ export function RiskGauge({ risk, size = 230 }) {
     <svg viewBox="0 0 220 200" width={size} className="nx-gauge" role="img" aria-label={risk ? `Risk score ${score} of 100, ${risk.level}` : 'No risk computed'}>
       <defs>
         <linearGradient id={`${id}-g`} x1="20" y1="0" x2="200" y2="0" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#3ddc97" /><stop offset="0.5" stopColor="#ffb020" /><stop offset="1" stopColor="#ff2e63" />
+          <stop offset="0" stopColor="#8fd9b0" /><stop offset="0.5" stopColor="#efc274" /><stop offset="1" stopColor="#ec6f85" />
         </linearGradient>
       </defs>
       {Array.from({ length: 31 }, (_, i) => {
@@ -225,8 +225,8 @@ export function DependencyMatrix({ graph, sim }) {
             const loss = c ? c.loss : 0;
             return (
               <g key={d.id} transform={`translate(${x0 + j * cell} ${y0 + i * cell})`}>
-                <rect width={cell - 4} height={cell - 4} rx="9" className="nx-cell" style={{ fill: links || loss ? `rgba(139,123,255,${0.12 + (links / maxLinks) * 0.5})` : 'rgba(255,255,255,0.03)' }} />
-                {loss > 0 && <rect width={cell - 4} height={cell - 4} rx="9" style={{ fill: `rgba(255,70,100,${0.25 + (loss / maxLoss) * 0.65})` }} />}
+                <rect width={cell - 4} height={cell - 4} rx="9" className="nx-cell" style={{ fill: links || loss ? `rgba(159,211,180,${0.12 + (links / maxLinks) * 0.5})` : 'rgba(255,255,255,0.03)' }} />
+                {loss > 0 && <rect width={cell - 4} height={cell - 4} rx="9" style={{ fill: `rgba(236,111,133,${0.25 + (loss / maxLoss) * 0.65})` }} />}
                 {(links > 0 || loss > 0) && <text x={(cell - 4) / 2} y={loss > 0 ? 32 : 42} textAnchor="middle" className="nx-cell-num">{links}</text>}
                 {loss > 0 && <text x={(cell - 4) / 2} y="48" textAnchor="middle" className="nx-cell-sub">{Math.round(loss * 100) >= 1 ? `-${Math.round(loss * 100)}` : '<1'}</text>}
                 <title>{`${links} dependency links${loss > 0 ? `, ${Math.round(loss * 100)} health points of failure carried` : ''}`}</title>
@@ -320,7 +320,7 @@ export function RiskCurve({ plan }) {
   const area = `${line} L${xs(pts.length - 1)} ${H - 26} L${xs(0)} ${H - 26} Z`;
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="nx-chart" role="img" aria-label="Risk after each recommended step">
-      <defs><linearGradient id={`${id}-a`} x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#5eead4" stopOpacity="0.35" /><stop offset="1" stopColor="#5eead4" stopOpacity="0" /></linearGradient></defs>
+      <defs><linearGradient id={`${id}-a`} x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#8ad9cc" stopOpacity="0.35" /><stop offset="1" stopColor="#8ad9cc" stopOpacity="0" /></linearGradient></defs>
       {niceTicks(top, 2).map((v) => (
         <g key={v}><line x1={L} x2={W - R} y1={ys(v)} y2={ys(v)} className="nx-grid" /><text x={L - 8} y={ys(v) + 4} textAnchor="end" className="nx-axis-value">{v}</text></g>
       ))}

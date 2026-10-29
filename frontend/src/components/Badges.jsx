@@ -12,14 +12,14 @@ export function StatusBadge({ status }) {
 export function LayerChip({ layer, label, color }) {
   return (
     <span className="nx-chip">
-      <i style={{ background: color || LAYER_COLORS[layer] || '#8b7bff' }} />
+      <i style={{ background: color || LAYER_COLORS[layer] || '#9fd3b4' }} />
       {label || layer}
     </span>
   );
 }
 
 export function HealthBar({ value }) {
-  const color = value >= 0.85 ? '#3ddc97' : value >= 0.5 ? '#ffb020' : '#ff5d73';
+  const color = value >= 0.85 ? '#8fd9b0' : value >= 0.5 ? '#efc274' : '#ef8f9f';
   return (
     <div className="nx-health" role="img" aria-label={`Health ${Math.round(value * 100)} percent`}>
       <span style={{ width: `${Math.max(value, 0.02) * 100}%`, background: color }} />
