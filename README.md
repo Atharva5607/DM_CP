@@ -2,6 +2,10 @@
 
 **A multi-layer graph decision support system for infrastructure dependency analysis.**
 
+**Live:** [nexusgraph-eight.vercel.app](https://nexusgraph-eight.vercel.app) · **API docs:** [nexusgraph-api-1m02.onrender.com/docs](https://nexusgraph-api-1m02.onrender.com/docs)
+
+> The API runs on a free Render instance that sleeps when idle. If it is waking up, the site opens the built-in demo snapshot and offers a *Connect to backend* retry.
+
 NexusGraph models roads, hospitals, power, communication and emergency response as separate graph layers, joins them with cross-layer dependency links, simulates how a failure in one layer cascades into the others, scores the resulting risk, and recommends corrective actions. Every recommendation is verified by re-running the simulation with that action applied. The engine is built on classic graph algorithms and discrete mathematics, and each one is implemented from scratch and used by the product.
 
 ![Dashboard replaying a power outage](assets/dashboard-power-outage.png)
