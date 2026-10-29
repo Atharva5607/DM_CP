@@ -6,11 +6,11 @@ from typing import Dict, List
 from ..models.domain import Dependency, Edge, Event, Layer, Node, Scenario
 
 LAYERS = [
-    Layer("traffic", "Traffic", "#f5a524", "Road junctions and the roads between them (edge weight = minutes)."),
-    Layer("hospital", "Healthcare", "#ff5d73", "Hospitals, wings and medical supply points."),
-    Layer("power", "Power", "#ffd84d", "Grid intake, substations and distribution hubs."),
-    Layer("comm", "Communication", "#38d6ff", "Core network hub, cell towers and emergency radio."),
-    Layer("emergency", "Emergency Response", "#a78bfa", "Control centre and field units."),
+    Layer("traffic", "Traffic", "#e8b86d", "Road junctions and the roads between them (edge weight = minutes)."),
+    Layer("hospital", "Healthcare", "#ef8f9f", "Hospitals, wings and medical supply points."),
+    Layer("power", "Power", "#efd88a", "Grid intake, substations and distribution hubs."),
+    Layer("comm", "Communication", "#7cc4e0", "Core network hub, cell towers and emergency radio."),
+    Layer("emergency", "Emergency Response", "#b9a6ef", "Control centre and field units."),
 ]
 
 # (id, layer, label, type, criticality, zone, is_source, anchor, repair_min, x, y)

@@ -63,10 +63,6 @@ export function NexusProvider({ children }) {
     }
   }, []);
 
-  useEffect(() => {
-    bootstrap();
-  }, [bootstrap]);
-
   const showDemoScenario = useCallback((id) => {
     const d = demo.current;
     const s = d.byScenario[id];
@@ -88,6 +84,11 @@ export function NexusProvider({ children }) {
     showDemoScenario(demo.current.scenarios[0].id);
     setBoot('ready');
   }, [showDemoScenario]);
+
+  // A static deploy has no engine behind /api; VITE_DEMO_ONLY=1 skips the offline screen and opens the snapshot.
+  useEffect(() => {
+    if (import.meta.env.VITE_DEMO_ONLY === '1') enterDemo(); else bootstrap();
+  }, [bootstrap, enterDemo]);
 
   const loadScenario = useCallback(
     (id) =>

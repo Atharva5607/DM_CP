@@ -287,7 +287,7 @@ export default function NetworkView({
               </radialGradient>
             </g>
           ))}
-          {[['idle', '#8b7bff'], ['active', '#ff5d73']].map(([k, c]) => (
+          {[['idle', '#9fd3b4'], ['active', '#ef8f9f']].map(([k, c]) => (
             <marker key={k} id={`${idp}-arrow-${k}`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto">
               <path d="M0 1 L9 5 L0 9 Z" fill={c} />
             </marker>

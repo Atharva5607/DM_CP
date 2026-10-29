@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LuBookOpen, LuCode, LuHouse, LuLayoutDashboard, LuWrench } from 'react-icons/lu';
+import { LuHouse, LuLayoutDashboard, LuWrench } from 'react-icons/lu';
 import CommandPalette from '../components/CommandPalette';
 
 const Ctx = createContext({ open: () => {}, setPageItems: () => {} });
@@ -29,8 +29,7 @@ export function PaletteProvider({ children }) {
   }, []);
 
   const nav = useMemo(() => [
-    ['/', 'Go to Home', LuHouse], ['/dashboard', 'Go to Dashboard', LuLayoutDashboard], ['/builder', 'Go to Scenario builder', LuWrench],
-    ['/methodology', 'Go to Methodology', LuBookOpen], ['/developers', 'Go to Developer notes', LuCode],
+    ['/', 'Go to Home', LuHouse], ['/dashboard', 'Go to Dashboard', LuLayoutDashboard], ['/builder', 'Go to Scenario builder', LuWrench]
   ].map(([to, label, Icon]) => ({ id: `nav-${to}`, label, group: 'Navigate', icon: <Icon />, run: () => navigate(to) })), [navigate]);
 
   const items = useMemo(() => [...pageItems, ...nav], [pageItems, nav]);

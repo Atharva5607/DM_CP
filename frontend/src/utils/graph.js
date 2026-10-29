@@ -2,16 +2,16 @@
 export const LAYER_ORDER = ['emergency', 'hospital', 'traffic', 'comm', 'power'];
 
 export const STATUS = {
-  safe: { label: 'Safe', color: '#3ddc97' },
-  warning: { label: 'Warning', color: '#ffb020' },
-  critical: { label: 'Critical', color: '#ff6a5a' },
-  failed: { label: 'Failed', color: '#ff2e63' },
-  isolated: { label: 'Isolated', color: '#9aa4c7' },
-  resolved: { label: 'Restored', color: '#5eead4' },
+  safe: { label: 'Safe', color: '#8fd9b0' },
+  warning: { label: 'Warning', color: '#efc274' },
+  critical: { label: 'Critical', color: '#f2937f' },
+  failed: { label: 'Failed', color: '#ec6f85' },
+  isolated: { label: 'Isolated', color: '#8fa095' },
+  resolved: { label: 'Restored', color: '#8ad9cc' },
 };
 export const STATUS_ORDER = ['failed', 'critical', 'isolated', 'warning', 'safe'];
 
-export const LAYER_COLORS = { traffic: '#f5a524', hospital: '#ff6b81', power: '#ffd84d', comm: '#38d6ff', emergency: '#a78bfa' };
+export const LAYER_COLORS = { traffic: '#e8b86d', hospital: '#ef8f9f', power: '#efd88a', comm: '#7cc4e0', emergency: '#b9a6ef' };
 
 export const EVENT_TYPES = [
   { id: 'road_block', label: 'Road blockage', target: 'edge' },
@@ -29,7 +29,7 @@ export const sortLayers = (layers) =>
     return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
   });
 
-export const layerColor = (layers, id) => layers.find((l) => l.id === id)?.color || LAYER_COLORS[id] || '#8b7bff';
+export const layerColor = (layers, id) => layers.find((l) => l.id === id)?.color || LAYER_COLORS[id] || '#9fd3b4';
 export const layerName = (layers, id) => layers.find((l) => l.id === id)?.name || id;
 
 export const statusOf = (health, isolated) =>

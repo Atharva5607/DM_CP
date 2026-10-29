@@ -1,13 +1,5 @@
-import { Link } from 'react-router-dom';
-import { LuArrowRight, LuBoxes, LuFlaskConical, LuGitBranch, LuLayers, LuNetwork, LuRadar, LuRepeat, LuSparkles, LuTimer } from 'react-icons/lu';
-import HeroCascade from '../components/HeroCascade';
-
-const SCENARIOS = [
-  ['road-blockage', 'Road blockage', 'Hospital access is cut and ambulances lose their destination.'],
-  ['power-outage', 'Power outage', 'One substation takes hospitals, towers and signals with it.'],
-  ['flood', 'Riverside flood', 'One flood zone ends up affecting all five layers.'],
-  ['comm-failure', 'Communication failure', 'The control centre loses its link to every field unit.'],
-];
+import { LuBoxes, LuFlaskConical, LuGitBranch, LuLayers, LuRadar, LuSparkles, LuTimer } from 'react-icons/lu';
+import Story from '../components/Story';
 
 const STEPS = [
   ['Model', 'Each infrastructure becomes a graph layer. Nodes are components, edges are the connections inside the layer.'],
@@ -33,22 +25,7 @@ const MATH = [
 export default function Landing() {
   return (
     <div className="nx-landing">
-      <section className="nx-hero">
-        <div className="nx-hero-copy">
-          <p className="nx-eyebrow"><LuNetwork /> Multi-layer graph decision support</p>
-          <h1>See what a single failure takes down with it.</h1>
-          <p className="nx-lead">NexusGraph models roads, hospitals, power, networks and emergency services as connected layers, traces how a failure in one reaches the others, and ranks what to fix first.</p>
-          <div className="nx-row wrap">
-            <Link to="/dashboard" className="nx-btn primary large">Open the dashboard <LuArrowRight /></Link>
-            <Link to="/builder" className="nx-btn large">Build a scenario</Link>
-          </div>
-          <div className="nx-try">
-            <span>Start from a demo scenario</span>
-            <div className="nx-pills">{SCENARIOS.map(([id, name]) => <Link key={id} to={`/dashboard?scenario=${id}`} className="nx-pill">{name}</Link>)}</div>
-          </div>
-        </div>
-        <HeroCascade />
-      </section>
+      <Story />
 
       <section className="nx-band">
         <div className="nx-wrap two-col">
@@ -90,7 +67,6 @@ export default function Landing() {
           <h2 className="nx-h2">Discrete mathematics, doing real work</h2>
           <p className="nx-sub">Every concept below is implemented and used by the engine, not only described.</p>
           <dl className="nx-math">{MATH.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
-          <div className="nx-row wrap"><Link to="/methodology" className="nx-btn"><LuRepeat /> Read the methodology</Link><Link to="/developers" className="nx-btn">Developer notes</Link></div>
         </div>
       </section>
     </div>
